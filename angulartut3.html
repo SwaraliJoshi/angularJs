@@ -1,0 +1,86 @@
+<!doctype html>
+<html ng-app="app3" ng-cloak>
+  <head>
+  	<title>AngularJS Tutorial 3</title>
+      <style>
+          [ng\:cloak], [ng-cloak], .ng-cloak {
+              display: none;
+          }
+      </style>
+  </head>
+  <body>
+      <div id="groceryList" ng-controller="gListCtrl">
+        <h3 class="ListTitle">{{groceries.length}} groceries to get</h3>
+
+        <ol>
+            <li>{{groceries[0].item}}</li>
+            <li>{{groceries[1].item}}</li>
+        </ol>
+        <ol start="3">
+            <li ng-repeat="grocery in groceries" ng-if="$index > 1">
+                {{grocery.item}} {{$index}}
+            </li>
+        </ol>
+
+        <table>
+            <tr ng-repeat-start="grocery in groceries"> 
+                <td>
+                    {{grocery.item}}
+                </td>
+            <tr ng-repeat-end> 
+                <td>
+                    {{grocery.purchased}}
+                </td>
+            </tr>
+        </table>
+
+        <label>Change 1st Item : </label>
+        <input ng-model="groceries[0].item" />
+
+        <h3>Grocery List</h3>
+
+        <div id="view" ng-view></div> 
+        <ng-include src="getList()"></ng-include>
+
+        <!-- <div ng-include="'groceryList.html'"></div> -->
+        
+        <label>
+            <input type="checkbox" ng-model="showList">
+            Show unordered list
+        </label>
+
+        <!-- <ul ng-if="showList">
+            <li ng-repeat="grocery in groceries">
+                {{grocery.item}}
+            </li>
+        </ul>
+
+        <ol ng-if="!showList">
+            <li ng-repeat="grocery in groceries">
+                {{grocery.item}}
+            </li>
+        </ol> -->
+        <!-- {{getList()}} -->
+        <br>
+        
+        <label> Type a number ( 1 to 4 ):
+            <input type="text" ng-model="numberChoice" />
+        </label>
+        
+        <div ng-switch="numberChoice">
+            <p ng-switch-when="1">You entered 1</p>
+            <p ng-switch-when="2">Number you entered : 2</p>
+            <p ng-switch-when="3">3 is what you entered</p>
+            <p ng-switch-when="4">Well, this is 4</p>
+            <p ng-switch-default>This is a default option for any invalid input</p>
+        </div>
+
+      </div>
+
+  	<script
+  		src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
+  	</script>
+  	<script src = "js/exam3.js"></script>
+  </body>
+</html>
+
